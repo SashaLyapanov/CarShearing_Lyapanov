@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: localhost    Database: clearBitrix1109
+-- Host: localhost    Database: carShearing_DB
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `clearBitrix1109`
+-- Current Database: `carShearing_DB`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `clearBitrix1109` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `carShearing_DB` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `clearBitrix1109`;
+USE `carShearing_DB`;
 
 --
 -- Table structure for table `b_admin_notify`
