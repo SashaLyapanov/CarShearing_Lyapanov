@@ -4,9 +4,14 @@ namespace Service;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Error;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Result;
+
+use Bitrix\Main\Type\DateTime;
 use Entity\CarTable;
 use Entity\StatusTable;
+use Entity\TestDrivesTable;
 use Throwable;
 
 require_once __DIR__ . '/../Entity/constants.php';
@@ -208,12 +213,73 @@ class CarService
             return $result;
         }
 
-        //todo (проверять будущие бронирования)
+        $currentDate = new DateTime();
+
+        $futureTestDrivesForCar = TestDrivesTable::getList([
+            'select' => ['ID', 'UF_DATE_START'],
+            'filter' => [
+                '=UF_CAR' => $id,
+                '>UF_DATE_END' => $currentDate,
+            ],
+            'limit' => 1,
+        ])->fetch();
+
+        if ($futureTestDrivesForCar) {
+            $result->addError(new Error('This car has future test drives and cannot be deleted.'));
+            return $result;
+        }
 
         $result = CarTable::delete($id);
 
         return $result;
     }
+
+    public function getCars(string $statusCode = null): Result
+    {
+        $result = new Result();
+
+        $filter = [];
+
+        if (!empty($statusCode)) {
+            $filter['=STATUS.UF_CODE'] = $statusCode;
+        }
+
+        $queryResult = CarTable::getList([
+            'select' => [
+                '*',
+                'STATUS_NAME' => 'STATUS.UF_NAME',
+                'STATUS_CODE' => 'STATUS.UF_CODE',
+            ],
+            'filter' => $filter,
+            'runtime' => [
+                new Reference(
+                    'STATUS',
+                    StatusTable::class,
+                    Join::on(
+                        'this.UF_STATUS',
+                        'ref.ID'
+                    )
+                )
+            ],
+            'order' => [
+                'ID' => 'ASC',
+            ],
+        ]);
+
+        $cars = [];
+
+        while ($car = $queryResult->fetch()) {
+            $cars[] = $car;
+        }
+
+        $result->setData([
+            "cars" => $cars,
+        ]);
+
+        return $result;
+    }
+
+
 
 
 
