@@ -1,0 +1,218 @@
+{
+  "info": {
+    "_postman_id": "be154c22-c070-4136-a9a9-e47347bce74e",
+    "name": "CarShearing1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40013089"
+  },
+  "item": [
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "CreateCar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"model\": \"Porsh\",\r\n    \"year\": 2022,\r\n    \"vin\": \"sd589987wefr54e52\",\r\n    \"status\": \"Доступен\",\r\n    \"price_per_day\": 2000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/cars/create.php",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cars",
+                "create.php"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CreateMultipleCars",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\r\n        \"model\": \"Lada1\",\r\n        \"year\": 2023,\r\n        \"vin\": \"d3589347wefr57e13\",\r\n        \"status\": \"Доступен\",\r\n        \"price_per_day\": 10\r\n    },\r\n    {\r\n        \"model\": \"Toyota1\",\r\n        \"year\": 2022,\r\n        \"vin\": \"sd345937wefr54238\",\r\n        \"status\": \"Доступен\",\r\n        \"price_per_day\": 3000\r\n    }\r\n]\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/cars/createMultipleCars.php",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cars",
+                "createMultipleCars.php"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateCar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"available\",\r\n    \"price_per_day\": 3000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/cars/updateCar.php?carId=22",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cars",
+                "updateCar.php"
+              ],
+              "query": [
+                {
+                  "key": "carId",
+                  "value": "22"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteCar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"model\": \"Porsh\",\r\n    \"year\": 2022,\r\n    \"vin\": \"sd589987wefr54e52\",\r\n    \"status\": \"Доступен\",\r\n    \"price_per_day\": 2000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/cars/delete.php",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cars",
+                "delete.php"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetCarsByStatus",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"model\": \"Porsh\",\r\n    \"year\": 2022,\r\n    \"vin\": \"sd589987wefr54e52\",\r\n    \"status\": \"Доступен\",\r\n    \"price_per_day\": 2000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/cars/getAllCarsByStatus.php?status=repair",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cars",
+                "getAllCarsByStatus.php"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "repair"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TestDrives",
+      "item": [
+        {
+          "name": "CreateTestDrive",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"\": \"\",\r\n    \"\": ,\r\n    \"\": \"\",\r\n    \"\": \"\",\r\n    \"\": \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://carShearingLyapanov/api/v1/test-drives/create.php?carId=2",
+              "protocol": "http",
+              "host": [
+                "carShearingLyapanov"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "test-drives",
+                "create.php"
+              ],
+              "query": [
+                {
+                  "key": "carId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
