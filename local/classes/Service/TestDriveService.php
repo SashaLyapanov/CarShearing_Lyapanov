@@ -3,8 +3,9 @@
 namespace Service;
 
 use Bitrix\Main\Error;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Result;
-
 use Bitrix\Main\Type\DateTime;
 use Entity\CarTable;
 use Entity\StatusTable;
@@ -119,6 +120,51 @@ class TestDriveService
             'dayRentQuantity' => $dayRentQuantity,
             'pricePerDay' => (int)$car['UF_PRICE_PER_DAY'],
         ]);
+
+        return $result;
+    }
+
+
+    public function getAllTestDrives(): Result
+    {
+        $result = new Result();
+
+        $testDrives = TestDrivesTable::getList([
+            'select' => [
+                'ID',
+                'UF_DATE_START',
+                'UF_DATE_END',
+                'UF_TOTAL_COST',
+
+                'CAR_NAME' => 'CAR.UF_MODEL',
+            ],
+            'runtime' => [
+                new Reference(
+                    'CAR',
+                    CarTable::class,
+                    Join::on(
+                        'this.UF_CAR',
+                        'ref.ID'
+                    )
+                )
+            ]
+        ])->fetchAll();
+
+        $items = [];
+
+        foreach ($testDrives as $testDrive) {
+            $items[] = [
+                'ID' => $testDrive['ID'],
+                'CAR_NAME' => $testDrive['CAR_NAME'],
+                'UF_DATE_START' => $testDrive['UF_DATE_START']->format('Y-m-d H:i:s'),
+                'UF_DATE_END' => $testDrive['UF_DATE_END']->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        $result->setData([
+            'testDrives' => $items,
+            ]
+        );
 
         return $result;
     }
