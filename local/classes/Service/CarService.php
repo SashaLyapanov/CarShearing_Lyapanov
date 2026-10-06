@@ -74,7 +74,6 @@ class CarService
 
         if (!$addResult->isSuccess()) {
             $result->addErrors($addResult->getErrors());
-
             return $result;
         }
 

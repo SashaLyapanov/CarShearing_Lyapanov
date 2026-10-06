@@ -3,7 +3,7 @@
 namespace Entity;
 
 use Bitrix\Main\ORM\Data\DataManager;
-use Bitrix\Main\ORM\Fields\DateField;
+use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations;
 use Bitrix\Main\ORM\Query\Join;
@@ -27,13 +27,17 @@ class TestDrivesTable extends DataManager
                 ->configureTitle('UF_CAR')
                 ->configureRequired(true),
 
-            (new DateField('UF_DATE_START'))
+            (new DatetimeField('UF_DATE_START'))
                 ->configureTitle('UF_DATE_START')
                 ->configureRequired(true),
 
-            (new DateField('UF_DATE_END'))
+            (new DatetimeField('UF_DATE_END'))
                 ->configureTitle('UF_DATE_END')
                 ->configureRequired(true),
+
+            (new IntegerField('UF_TOTAL_COST'))
+                ->configureTitle('UF_TOTAL_COST')
+                ->configureDefaultValue(0),
 
             (new Relations\Reference(
                 'UF_CAR',
