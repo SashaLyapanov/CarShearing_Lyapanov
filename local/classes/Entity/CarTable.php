@@ -1,9 +1,13 @@
 <?php
 
+namespace Entity;
+
+use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\StringField;
+use Bitrix\Main\ORM\Query\Join;
 
-class CarTable
+class CarTable extends DataManager
 {
 
     public static function getTableName(): string

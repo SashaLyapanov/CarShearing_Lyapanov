@@ -1,10 +1,14 @@
 <?php
 
+namespace Entity;
+
+use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\DateField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations;
+use Bitrix\Main\ORM\Query\Join;
 
-class TestDrivesTable
+class TestDrivesTable extends DataManager
 {
 
     public static function getTableName(): string
