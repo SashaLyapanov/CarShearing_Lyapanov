@@ -4,13 +4,16 @@ use Bitrix\Main\Loader;
 
 try {
     Loader::registerAutoLoadClasses(null, [
-        'Local\\HighLoadBlockHelper' => '/local/classes/HighloadBlockHelper.php',
+        'Entity\\CarTable' => '/local/classes/Entity/CarTable.php',
 
-        'Local\\Car' => '/local/classes/Car.php',
+        'Entity\\StatusTable' => '/local/classes/Entity/StatusTable.php',
 
-        'Local\\TestDrive' => '/local/classes/TestDrive.php',
+        'Entity\\TestDrivesTable' => '/local/classes/Entity/TestDrivesTable.php',
+
+        'Service\\CarService' => '/local/classes/Service/CarService.php',
+
+        'Service\\TestDriveService' => '/local/classes/Service/TestDriveService.php',
     ]);
 } catch (\Bitrix\Main\LoaderException $e) {
     echo $e->getMessage();
 }
-
