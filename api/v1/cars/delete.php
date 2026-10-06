@@ -7,22 +7,9 @@ require $_SERVER['DOCUMENT_ROOT']
 
 header('Content-Type: application/json; charset=UTF-8');
 
-$rawBody = file_get_contents('php://input');
+$carId = (int)($_GET['carId'] ?? 0);
 
-$data = json_decode($rawBody, true);
-
-if (!is_array($data)) {
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'error' => ['Invalid JSON'],
-    ], JSON_UNESCAPED_UNICODE);
-
-    exit;
-}
-
-$result = CarService::create($data);
+$result = (new Service\CarService)->delete($carId);
 
 if (!$result->isSuccess()) {
     http_response_code(400);

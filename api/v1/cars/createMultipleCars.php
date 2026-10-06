@@ -22,7 +22,9 @@ if (!is_array($data)) {
     exit;
 }
 
-$result = CarService::create($data);
+$carService = new CarService();
+
+$result = $carService->createMultipleCars($data);
 
 if (!$result->isSuccess()) {
     http_response_code(400);
