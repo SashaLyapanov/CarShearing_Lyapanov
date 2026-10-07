@@ -7,9 +7,15 @@ require $_SERVER['DOCUMENT_ROOT']
 
 header('Content-Type: application/json; charset=UTF-8');
 
+$params = [];
+
 $statusCode = (string)($_GET['statusCode'] ?? null);
 
-$result = (new Service\CarService)->getCars($statusCode);
+if ($statusCode) {
+    $params['statusCode'] = $statusCode;
+}
+
+$result = (new Service\CarService)->getCars($params);
 
 if (!$result->isSuccess()) {
     http_response_code(400);

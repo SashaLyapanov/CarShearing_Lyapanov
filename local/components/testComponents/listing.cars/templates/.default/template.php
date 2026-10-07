@@ -1,4 +1,4 @@
-<?php
+<?
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -7,23 +7,26 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 
     <h2>Список бронирований автомобилей</h2>
 
-<?php if (empty($arResult['ITEMS'])): ?>
+<?
+if (empty($arResult['ITEMS'])): ?>
 
     <p>Бронирований нет</p>
 
-<?php else: ?>
+<?
+else: ?>
 
     <table border="1" cellpadding="10" cellspacing="0">
         <thead>
-            <tr>
-                <th>Автомобиль</th>
-                <th>Начало брони</th>
-                <th>Конец брони</th>
-            </tr>
+        <tr>
+            <th>Автомобиль</th>
+            <th>Начало брони</th>
+            <th>Конец брони</th>
+        </tr>
         </thead>
 
         <tbody>
-        <?php foreach ($arResult['ITEMS'] as $item): ?>
+        <?
+        foreach ($arResult['ITEMS'] as $item): ?>
 
             <tr>
                 <td>
@@ -39,9 +42,11 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
                 </td>
             </tr>
 
-        <?php endforeach; ?>
+        <?
+        endforeach; ?>
 
         </tbody>
     </table>
 
-<?php endif; ?>
+<?
+endif; ?>

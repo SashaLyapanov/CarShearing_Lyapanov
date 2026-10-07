@@ -1,6 +1,6 @@
 <?php
 
-namespace Entity;
+namespace Models;
 
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\DatetimeField;
@@ -13,7 +13,7 @@ class TestDrivesTable extends DataManager
 
     public static function getTableName(): string
     {
-        return 'b_test_drives';
+        return 'test_drives';
     }
 
     public static function getMap(): array
@@ -40,7 +40,7 @@ class TestDrivesTable extends DataManager
                 ->configureDefaultValue(0),
 
             (new Relations\Reference(
-                'UF_CAR',
+                'CAR',
                 CarTable::class,
                 Join::on('this.UF_CAR', 'ref.ID'),
             ))->configureJoinType('left')

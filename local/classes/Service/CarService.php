@@ -3,22 +3,46 @@
 namespace Service;
 
 use Bitrix\Main\Application;
+use Bitrix\Main\DB\Ddl\Exception;
 use Bitrix\Main\Error;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Objectify\EntityObject;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Result;
 
 use Bitrix\Main\Type\DateTime;
-use Entity\CarTable;
-use Entity\StatusTable;
-use Entity\TestDrivesTable;
+use Models\CarTable;
+use Models\StatusTable;
+use Models\TestDrivesTable;
 use Throwable;
-
-require_once __DIR__ . '/../Entity/constants.php';
-
 
 class CarService
 {
+
+    public function getCar(int $carId)
+    {
+        if (!$carId) {
+            throw new Exception(400, "Enter correct car id.");
+        }
+
+        $car = CarTable::getList([
+            'select' => [
+                '*',
+                'STATUS_CODE' => 'STATUS.UF_CODE',
+                'STATUS_NAME' => 'STATUS.UF_NAME'
+            ],
+            'filter' => [
+                '=ID' => $carId
+            ],
+            'limit' => 1
+        ])->fetch();
+
+        if (!$car) {
+            return null;
+        }
+
+        return $car;
+    }
 
     public static function create(array $data): Result
     {
@@ -44,7 +68,7 @@ class CarService
             return $result;
         }
 
-        if ($data['year'] > ACTUAL_YEAR) {
+        if ($data['year'] > date('Y')) {
             $result->addError(new Error('Year must not be greater than current year.'));
             return $result;
         }
@@ -233,14 +257,14 @@ class CarService
         return $result;
     }
 
-    public function getCars(string $statusCode = null): Result
+    public function getCars(array $params = []): Result
     {
         $result = new Result();
 
         $filter = [];
 
-        if (!empty($statusCode)) {
-            $filter['=STATUS.UF_CODE'] = $statusCode;
+        if (!empty($params['statusCode'])) {
+            $filter['=STATUS.UF_CODE'] = $params['statusCode'];
         }
 
         $queryResult = CarTable::getList([

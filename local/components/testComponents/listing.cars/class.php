@@ -3,8 +3,8 @@
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Query\Join;
 
-use Entity\CarTable;
-use Entity\TestDrivesTable;
+use Models\CarTable;
+use Models\TestDrivesTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -23,16 +23,6 @@ class TestDrivesListComponent extends CBitrixComponent
                 'UF_DATE_END',
 
                 'CAR_NAME' => 'CAR.UF_MODEL',
-            ],
-            'runtime' => [
-                new Reference(
-                    'CAR',
-                    CarTable::class,
-                    Join::on(
-                        'this.UF_CAR',
-                        'ref.ID'
-                    )
-                ),
             ],
             'order' => [
                 'ID' => 'ASC',

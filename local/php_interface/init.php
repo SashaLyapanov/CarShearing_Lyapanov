@@ -4,11 +4,11 @@ use Bitrix\Main\Loader;
 
 try {
     Loader::registerAutoLoadClasses(null, [
-        'Entity\\CarTable' => '/local/classes/Entity/CarTable.php',
+        'Models\\CarTable' => '/local/classes/Models/CarTable.php',
 
-        'Entity\\StatusTable' => '/local/classes/Entity/StatusTable.php',
+        'Models\\StatusTable' => '/local/classes/Models/StatusTable.php',
 
-        'Entity\\TestDrivesTable' => '/local/classes/Entity/TestDrivesTable.php',
+        'Models\\TestDrivesTable' => '/local/classes/Models/TestDrivesTable.php',
 
         'Service\\CarService' => '/local/classes/Service/CarService.php',
 

@@ -18,25 +18,9 @@ if ($carId <= 0) {
 
     exit;
 }
-
-$rawBody = file_get_contents('php://input');
-
-$data = json_decode($rawBody, true);
-
-if (!is_array($data)) {
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'error' => ['Invalid JSON'],
-    ], JSON_UNESCAPED_UNICODE);
-
-    exit;
-}
-
 $carService = new CarService();
 
-$result = $carService->update($carId, $data);
+$result = $carService->getCar($carId);
 
 if (!$result->isSuccess()) {
     http_response_code(400);

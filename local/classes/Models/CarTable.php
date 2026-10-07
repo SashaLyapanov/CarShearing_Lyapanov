@@ -1,6 +1,6 @@
 <?php
 
-namespace Entity;
+namespace Models;
 
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -12,7 +12,7 @@ class CarTable extends DataManager
 
     public static function getTableName(): string
     {
-        return 'b_cars';
+        return 'cars';
     }
 
     public static function getMap(): array
@@ -43,7 +43,7 @@ class CarTable extends DataManager
                 ->configureRequired(true),
 
             (new \Bitrix\Main\ORM\Fields\Relations\Reference(
-                'UF_STATUS',
+                'STATUS',
                 StatusTable::class,
                 Join::on('this.UF_STATUS', 'ref.ID')
             ))->configureJoinType('left'),

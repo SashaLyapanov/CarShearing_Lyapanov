@@ -7,9 +7,9 @@ use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Result;
 use Bitrix\Main\Type\DateTime;
-use Entity\CarTable;
-use Entity\StatusTable;
-use Entity\TestDrivesTable;
+use Models\CarTable;
+use Models\StatusTable;
+use Models\TestDrivesTable;
 
 class TestDriveService
 {
@@ -35,24 +35,10 @@ class TestDriveService
             return $result;
         }
 
+        $carService = new CarService();
+        $car = $carService->getCar($carId);
 
-        $car = CarTable::getById($carId)->fetch();
-
-        if (!$car) {
-            $result->addError(new Error("Car not found."));
-            return $result;
-        }
-
-        $status = StatusTable::getById(
-            $car['UF_STATUS']
-        )->fetch();
-
-        if (!$status) {
-            $result->addError(new Error("Status not found."));
-            return $result;
-        }
-
-        if ($status['UF_CODE'] === 'repair') {
+        if ($car['STATUS_CODE'] === 'repair') {
             $result->addError(new Error("Car is repair and could not be rent."));
             return $result;
         }
@@ -85,7 +71,8 @@ class TestDriveService
         }
 
         // Количество дней (переводим из секунд в дни
-        $dayRentQuantity = ($dateEnd->getTimestamp() - $dateStart->getTimestamp()) / 86400;
+//        $dayRentQuantity = ($dateEnd->getTimestamp() - $dateStart->getTimestamp()) / 86400;
+        $dayRentQuantity = $dateStart->getDiff($dateEnd)->days;
 
         if ($dayRentQuantity <= 0) {
             $result->addError(new Error("Start day later end day."));
@@ -138,16 +125,6 @@ class TestDriveService
 
                 'CAR_NAME' => 'CAR.UF_MODEL',
             ],
-            'runtime' => [
-                new Reference(
-                    'CAR',
-                    CarTable::class,
-                    Join::on(
-                        'this.UF_CAR',
-                        'ref.ID'
-                    )
-                )
-            ]
         ])->fetchAll();
 
         $items = [];

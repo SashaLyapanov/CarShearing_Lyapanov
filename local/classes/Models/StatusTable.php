@@ -1,6 +1,6 @@
 <?php
 
-namespace Entity;
+namespace Models;
 
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -11,7 +11,7 @@ class StatusTable extends DataManager
 
     public static function getTableName(): string
     {
-        return 'b_statuses';
+        return 'statuses';
     }
 
     public static function getMap(): array
